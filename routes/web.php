@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/google/callback',[GoogleController::class, 'handleGoogleCallBack'])->name('google.callback');
+
+Route::get('/login',[LoginController::class, 'login'])->name('login');
+Route::get('/registration',[RegistrationController::class, 'registration'])->name('registration');
+
+Route::get('/registration/google',[RegistrationController::class, 'registrationGoogle'])->name('registration.google');
+Route::get('/login/google',[LoginController::class, 'loginGoogle'])->name('login.google');
+
+Route::post('/registration/submit',[RegistrationController::class, 'registrationSubmit'])->name('registration.submit');
+Route::post('/login/submit',[LoginController::class, 'loginSubmit'])->name('login.submit');
+
+Route::get('/registration/google/submit',[RegistrationController::class, 'registrationGoogleSubmit'])->name('registration.google.submit');
+Route::get('/login/google/submit',[LoginController::class, 'loginGoogleSubmit'])->name('login.google.submit');
