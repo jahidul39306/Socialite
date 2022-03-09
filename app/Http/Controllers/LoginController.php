@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function loginGoogle()
     {
         session(['from' => 'login']);
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function loginSubmit(Request $req)
