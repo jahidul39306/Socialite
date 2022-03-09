@@ -9,7 +9,7 @@ class GoogleController extends Controller
 {
     public function handleGoogleCallBack()
     {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
         $data = (array)$user;
 
         if(session('from') == 'login')

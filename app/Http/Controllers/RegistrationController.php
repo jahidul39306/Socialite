@@ -18,7 +18,7 @@ class RegistrationController extends Controller
     public function registrationGoogle()
     {
         session(['from' => 'registration']);
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function registrationSubmit(Request $req)
