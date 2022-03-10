@@ -39,6 +39,7 @@ class RegistrationController extends Controller
         $us->status = 1;
         $us->emailVerified = 0;
         $us->save();
+
         Session::flash('message', 'Registration successful!, Please login');
         return redirect()->route('login');
     }

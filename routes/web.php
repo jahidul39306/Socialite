@@ -7,6 +7,9 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SaveController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +53,12 @@ Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.cr
 
 //logout
 Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+
+//like
+Route::get('/like/create', [LikeController::class, 'likeCreate'])->name('like');
+
+//save
+Route::get('/save/create', [SaveController::class, 'saveCreate'])->name('save');
+
+//comment
+Route::get('/comment/view', [CommentController::class, 'commentView'])->name('comment.view');
