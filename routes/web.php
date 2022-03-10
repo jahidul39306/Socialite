@@ -7,6 +7,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,11 @@ Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.cr
 
 //logout
 Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+
+//Profile
+Route::get('/profile',[ProfileController::class,'getProfileData'])->name('profile')->middleware('general.auth');
+
+//edit profile
+Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile')->middleware('general.auth');
+
+Route::post('/editProfile',[ProfileController::class,'editProfileDataSubmit'])->name('editProfileSubmit')->middleware('general.auth');
