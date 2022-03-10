@@ -54,13 +54,13 @@
                 <div class="user-profile">
                     <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
                     <div class="">
-                        <p>Jahidul</p>
+                        <p>{{Session::get('name')}}</p>
                     </div>
                 </div>
                 <form action="{{route('post.create')}}" method="POST">
                     {{ csrf_field() }}
                     <div class="post-input-container">
-                        <textarea name="postData" id=""  rows="3" placeholder="Share your lite, Jahidul!"></textarea>
+                        <textarea name="postData" id=""  rows="3" placeholder="Share your lite, {{Session::get('name')}}"></textarea>
                         @error('post-data')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -76,26 +76,28 @@
                 </form>
             </div>
 
-            <div class="post-container">
-                <div class="user-profile">
-                    <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                    <div class="">
-                        <p>Jahidul</p>
-                        <span>March 24, 2022, 12.40 pm</span>
+            @foreach($posts->reverse() as $p)
+                <div class="post-container">
+                    <div class="user-profile">
+                        <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
+                        <div class="">
+                            <p>{{$p->user->name}}</p>
+                            <span>{{$p->createdAt}}</span>
+                        </div>
+                    </div>
+                    <p class="post-text">{{$p->postText}}</p>
+                    <hr>
+                    <div class="post-row">
+                        <div></div>
+                        <div class="activity-icons">
+                            {{-- @php$liked = $p->like->user;@endphp --}}
+                            <div><a href="{{route('like', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/glyph-neue/64/000000/thick-arrow-pointing-up.png"/></a>{{count($p->like)}}</div>
+                            <div><a href="{{route('comment.view')}}"><img src="https://img.icons8.com/color/48/000000/comments--v1.png"/></a>{{count($p->comment)}}</div>
+                            <div><a href="{{route('save', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/000000/external-Save-social-media-bearicons-detailed-outline-bearicons.png"/></a>{{count($p->favourite)}}</div>
+                        </div>
                     </div>
                 </div>
-                <p class="post-text">jfjsdk uufuk gskfjgh dgkhgsdkughdjvhbgdhg fjdh gusdgh   bghdghgjh</p>
-                <hr>
-                <div class="post-row">
-                    
-                    <div class="activity-icons">
-                        <div><img src="https://img.icons8.com/glyph-neue/64/000000/thick-arrow-pointing-up.png"/>120</div>
-                        <div><img src="https://img.icons8.com/color/48/000000/comments--v1.png"/>120</div>
-                        <div><img src="https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/000000/external-Save-social-media-bearicons-detailed-outline-bearicons.png"/>120</div>
-                    </div>
-                   
-                </div>
-            </div>
+            @endforeach
 
         </div>
         {{-- right-sidebar --}}

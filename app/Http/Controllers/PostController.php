@@ -25,4 +25,10 @@ class PostController extends Controller
         $p->save();
         return redirect()->back();
     }
+
+    public function allPost()
+    {
+        $posts = Post::get();
+        return $posts;
+    }
 }
