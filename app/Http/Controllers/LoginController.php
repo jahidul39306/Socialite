@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,6 +41,7 @@ class LoginController extends Controller
             Session::put('id', $findUser->id);
             Session::put('email', $findUser->email);
             Session::put('name', $findUser->name);
+
             return redirect()->route('home');
         }
         Session::flash('message', 'Wrong credentials');
