@@ -29,7 +29,8 @@
                 <a href="{{route('logout')}}"><img src="https://img.icons8.com/cute-clipart/50/000000/exit.png"/></a>
             </div>
             <div class="nav-user-icon online">
-                <img src="images/profile-icon.png">
+                <a href="{{route('profile')}}"><img src="images/profile-icon.png"></a>
+                
             </div>
         </div>
     </nav>
@@ -38,7 +39,7 @@
         {{-- left-sidebar --}}
         <div class="left-sidebar">
             <div class="imp-links">
-                <a href="#"><i class="fa-solid fa-address-card"></i>Profile</a>
+                <a href="{{route('profile')}}"><i class="fa-solid fa-address-card"></i>Profile</a>
                 <a href="#"><i class="fa-solid fa-briefcase"></i>Work profile</a>
                 <a href="#"><i class="fa-solid fa-pencil"></i>My posts</a>
                 <a href="#"><i class="fa-solid fa-star"></i>Favourite posts</a>

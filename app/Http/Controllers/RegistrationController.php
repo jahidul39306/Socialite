@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
@@ -40,6 +40,12 @@ class RegistrationController extends Controller
         $us->emailVerified = 0;
         $us->save();
 
+<<<<<<< HEAD
+=======
+        $profile=new Profile();
+        $profile->fk_users_id=$us->id;
+        $profile->save();
+>>>>>>> 8a990ced92dc3b12bed3e2b73b7a761f21df8258
         Session::flash('message', 'Registration successful!, Please login');
         return redirect()->route('login');
     }
@@ -63,6 +69,11 @@ class RegistrationController extends Controller
             $newUser->google_id = $user->id;
             $newUser->google_token = $user->token;
             $newUser->save();
+
+            $profile=new Profile();
+            $profile->fk_users_id = $newUser->id;
+            $profile->save();
+
             Session::flash('message', 'Registration successful!, Please login');
             return redirect()->route('login');
         }
