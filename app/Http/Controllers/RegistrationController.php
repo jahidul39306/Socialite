@@ -39,13 +39,10 @@ class RegistrationController extends Controller
         $us->status = 1;
         $us->emailVerified = 0;
         $us->save();
-
-<<<<<<< HEAD
-=======
         $profile=new Profile();
         $profile->fk_users_id=$us->id;
         $profile->save();
->>>>>>> 8a990ced92dc3b12bed3e2b73b7a761f21df8258
+
         Session::flash('message', 'Registration successful!, Please login');
         return redirect()->route('login');
     }
