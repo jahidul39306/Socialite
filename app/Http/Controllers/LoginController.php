@@ -32,9 +32,18 @@ class LoginController extends Controller
         $findUser = User::where('email', $req->email)->first();
         if(Hash::check($req->password, $findUser->password))
         {
-            return "<h1>you are logged in<h1>";
+            if($findUser->status == 0)
+            {
+                Session::flash('message', 'You are blocked');
+                return redirect()->route('login');
+            }
+            Session::put('id', $findUser->id);
+            Session::put('email', $findUser->email);
+            Session::put('name', $findUser->name);
+            return redirect()->route('home');
         }
-        return "<h1>Login failed</h1>";
+        Session::flash('message', 'Wrong credentials');
+        return redirect()->route('login');
     }
 
     public function loginGoogleSubmit(Request $user)
@@ -42,12 +51,21 @@ class LoginController extends Controller
         $findUser = User::where('google_id', $user->id)->first();
         if($findUser)
         {
-            Session::flash('message', 'You are loggedin');
-            return "<h1>you are logged in<h1>";
+            if($findUser->status == 0)
+            {
+                Session::flash('message', 'You are blocked');
+                return redirect()->route('login');
+            }
+            Session::put('id', $findUser->id);
+            Session::put('email', $findUser->email);
+            Session::put('name', $findUser->name);
+            return redirect()->route('home');
+           
         }
         else
         {
-            return "<h1>You have no account with this account<h1>";
+            Session::flash('message', 'You have no account with this google account');
+            return redirect()->route('login');
         }
     }
 }

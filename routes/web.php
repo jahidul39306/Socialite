@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,10 @@ use App\Http\Controllers\HomeController;
 */
 
 
+//google
 Route::get('/google/callback',[GoogleController::class, 'handleGoogleCallBack'])->name('google.callback');
 
+//login & registration
 Route::get('/login',[LoginController::class, 'login'])->name('login');
 Route::get('/registration',[RegistrationController::class, 'registration'])->name('registration');
 
@@ -32,4 +36,17 @@ Route::post('/login/submit',[LoginController::class, 'loginSubmit'])->name('logi
 Route::get('/registration/google/submit',[RegistrationController::class, 'registrationGoogleSubmit'])->name('registration.google.submit');
 Route::get('/login/google/submit',[LoginController::class, 'loginGoogleSubmit'])->name('login.google.submit');
 
-Route::get('/home',[HomeController::class, 'home'])->name('home');
+// Route::group(['middleware' => ['GeneralAuth']], function()
+// {
+//     //home
+//     Route::get('/home',[HomeController::class, 'home'])->name('home');
+// });
+
+//home
+Route::get('/home',[HomeController::class, 'home'])->name('home')->middleware('general.auth');
+
+//post
+Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.create');
+
+//logout
+Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');

@@ -26,7 +26,7 @@
                 <input type='text' placeholder="Search">
             </div>
             <div class="logout">
-                <img src="https://img.icons8.com/cute-clipart/50/000000/exit.png"/>
+                <a href="{{route('logout')}}"><img src="https://img.icons8.com/cute-clipart/50/000000/exit.png"/></a>
             </div>
             <div class="nav-user-icon online">
                 <img src="images/profile-icon.png">
@@ -56,16 +56,23 @@
                         <p>Jahidul</p>
                     </div>
                 </div>
-                <div class="post-input-container">
-                    <textarea name="" id=""  rows="3" placeholder="Share your lite, Jahidul!"></textarea>
-                    <div class="add-post-links">
-                        <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/video-message.png"/>Live video</a>
-                        <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/image-gallery.png"/>Photo/Video</a>
-                        <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/comedy.png"/>Feeling/Activity</a>
-                        <a href="#" class='submit-post'><img src="https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/64/000000/external-send-user-interface-febrian-hidayat-outline-color-febrian-hidayat.png"/>Submit</a>
-                    </div>
-                    
-                </div>
+                <form action="{{route('post.create')}}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="post-input-container">
+                        <textarea name="postData" id=""  rows="3" placeholder="Share your lite, Jahidul!"></textarea>
+                        @error('post-data')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="add-post-links">
+                            <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/video-message.png"/>Live video</a>
+                            <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/image-gallery.png"/>Photo/Video</a>
+                            <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/comedy.png"/>Feeling/Activity</a>
+                        </div>
+                        <div class="submit-post">
+                            <input type="image" value="Submit" src='https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/64/000000/external-send-user-interface-febrian-hidayat-outline-color-febrian-hidayat.png'/>
+                        </div>
+                    </div>         
+                </form>
             </div>
 
             <div class="post-container">

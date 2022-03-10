@@ -182,7 +182,10 @@ nav{
     background: transparent;
     resize: none;
 }
-
+.text-danger{
+    color: red;
+    font-size: small;
+}
 .add-post-links{
     display: flex;
     margin-top: 10px;
@@ -202,13 +205,13 @@ nav{
     margin-right: 10px;
 }
 
-.submit-post img{
+.submit-post input{
     width: 30px;
-    margin-left: 90px;
+    margin-left: 90%;
 }
-.submit-post{
+/* .submit-post{
     font-weight: bolder;
-}
+} */
 .post-container{
     width: 100%;
     background: #fff;
