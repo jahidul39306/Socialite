@@ -26,6 +26,6 @@ class LikeController extends Controller
         $like->fk_posts_id = $postId;
         $like->fk_users_id = Session::get('id');
         $like->save();
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

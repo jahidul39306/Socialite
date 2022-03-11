@@ -26,6 +26,6 @@ class SaveController extends Controller
         $fav->fk_posts_id = $postId;
         $fav->fk_users_id = Session::get('id');
         $fav->save();
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

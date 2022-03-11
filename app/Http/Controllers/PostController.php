@@ -26,9 +26,9 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function allPost()
+    public function myPosts()
     {
-        $posts = Post::get();
-        return $posts;
+        $posts = Post::where('fk_users_id', Session::get('id'))->get();
+        return view('myPosts')->with('posts', $posts);
     }
 }

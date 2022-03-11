@@ -28,7 +28,7 @@
                 <a href="{{route('logout')}}"><img src="https://img.icons8.com/cute-clipart/50/000000/exit.png"/></a>
             </div>
             <div class="nav-user-icon online">
-                <a href="{{route('profile')}}"><img src="images/profile-icon.png"></a>
+                <a href="{{route('profile')}}"><img src={{URL('images/profile-icon.png')}}></a>
                 
             </div>
         </div>

@@ -35,4 +35,8 @@ class User extends Authenticatable
         return $this->hasMany(Save::class, 'fk_users_id');
     }
 
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class, 'fk_users_id');
+    }
 }

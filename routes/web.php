@@ -52,6 +52,7 @@ Route::get('/home',[HomeController::class, 'home'])->name('home')->middleware('g
 
 //post
 Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.create');
+Route::get('/post/myposts',[PostController::class, 'myPosts'])->name('my.posts');
 
 //logout
 Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
@@ -65,9 +66,11 @@ Route::get('/save/create', [SaveController::class, 'saveCreate'])->name('save');
 
 //comment
 Route::get('/comment/view', [CommentController::class, 'commentView'])->name('comment.view');
+Route::post('/comment/create',[CommentController::class, 'commentCreate'])->name('comment.create');
 
 //Profile
 Route::get('/profile',[ProfileController::class,'getProfileData'])->name('profile')->middleware('general.auth');
+Route::get('/profile/id',[ProfileController::class,'getProfileById'])->name('profile.id')->middleware('general.auth');
 
 //edit profile
 Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile')->middleware('general.auth');
