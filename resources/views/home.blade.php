@@ -47,7 +47,7 @@
                     <div class="user-profile">
                         <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
                         <div class="post-info">
-                            <a href="{{route('profile.id', ["userId", $p->fk_users_id])}}"><p>{{$p->user->name}}</p></a>
+                            <a href="{{route('profile.id', ["userId" => encrypt($p->fk_users_id)])}}"><p>{{$p->user->name}}</p></a>
                             <span>{{$p->createdAt}}</span>
                         </div>
                     </div>

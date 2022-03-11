@@ -63,6 +63,7 @@ Route::get('/like/create', [LikeController::class, 'likeCreate'])->name('like');
 
 //save
 Route::get('/save/create', [SaveController::class, 'saveCreate'])->name('save');
+Route::get('/save/show', [SaveController::class, 'saveShow'])->name('save.show');
 
 //comment
 Route::get('/comment/view', [CommentController::class, 'commentView'])->name('comment.view');
