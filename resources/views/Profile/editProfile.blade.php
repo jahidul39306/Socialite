@@ -21,23 +21,23 @@
                         <div class="img">
                             <img class="img-fluid rounded-top"  src="{{URL('images/a.png')}}" alt="cover photo">
                             @if(is_null($profileData->profileImage))
-                            {
+                            
                                 <img class="rounded-circle bg-dark" onclick="triggerClick()" id="profileDisplay" src="images/p.jpg " alt="profile image">
-                            }
-                            @else{
+                            
+                            @else
                                 <img class="rounded-circle bg-dark" onclick="triggerClick()" id="profileDisplay" src="{{asset($profileData->profileImage)}} " alt="profile image">
-                            }
+                                
                             @endif
                             <!-- <img class="rounded-circle bg-dark" onclick="triggerClick()" id="profileDisplay" src="{{asset($profileData->profileImage)}} " alt="profile image"> -->
     
-                            <input type="file" onchange="displayImage(this)" name="profileImage" id="profileImage" style="display:none">
+                            <input type="file" onchange="displayImage(this)"  name="profileImage" id="profileImage" style="display:none">
                             @error('profileImage')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                         </div>
                         <div class="crad-body">
                             <div class="card-title">
-                                <input class=" text-justify" type="text" name="name" id="name" value="{{$profileName->name}}">
+                                <input class=" text-justify" type="text" name="name" id="name" value="{{$profileName->name ?? old('name')}}">
                             </div>
                         </div>
                         
@@ -45,14 +45,14 @@
                             <div class="row ">
                                 <div class="form-group text-left col-auto mr-auto ">
                                     <label class="text-left" for="address">Address</label>
-                                    <input type="text" class="form-control" name="address" id="address" value="{{$profileData->address}}">
+                                    <input type="text" class="form-control" name="address" id="address" value="{{$profileData->address ?? old('address')}}">
                                     @error('address')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-auto ">
                                     <label for="dob">Date of birth</label>
-                                    <input type="date" class="form-control" name="dob" id="dob" value="{{$profileData->dob}}">
+                                    <input type="date" class="form-control" name="dob" id="dob" value="{{$profileData->dob ?? old('dob')}}">
                                     @error('dob')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -64,6 +64,7 @@
                                 <div class=" text-left col-auto mr-auto ">
                                     <label for="gender">Gender</label>
                                     <select name="gender" id="gender">
+                                        <option value="select" {{$profileData->gender ?? 'selected'}}>Select</option>
                                         <option value="male" {{$profileData->gender=='male'? 'selected' :''}}>Male</option>
                                         <option value="female" {{$profileData->gender=='female'? 'selected' :''}}>Female</option>
                                         

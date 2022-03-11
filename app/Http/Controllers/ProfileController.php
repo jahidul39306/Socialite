@@ -39,24 +39,44 @@ class ProfileController extends Controller
                     'gender'=>'required',
                     'religion'=>'required',
                     'relationship'=>'required',
-                    'profileImage'=>'required|mimes:jpg,png',
+                    'profileImage'=>'mimes:jpg,png',
                 ]
                 );
-
-                $filename=$req->name.'.'.$req->file('profileImage')->getClientOriginalExtension();
-                // return $filename;
-                $req->file('profileImage')->storeAs('public/images',$filename);
                 $profile=Profile::where('fk_users_id','=',$userId)->first();
+                $user=User::where('id','=',$userId)->first();
+                if($req->file('profileImage')=='')
+                {
+                    $filename=$profile->profileImage;
+                    $profile->address=$req->address;
+                    $profile->dob=$req->dob;
+                    $profile->gender=$req->gender;
+                    $profile->religion=$req->religion;
+                    $profile->relationship=$req->relationship;
+                    $profile->fk_users_id=$userId;
+                    $profile->save();
+                    $user->name=$req->name;
+                    $user->save();
+                    
+
+                }
+                else{
+                    $filename=$req->name.'.'.$req->file('profileImage')->getClientOriginalExtension();
+                //  return $filename;
+                    $req->file('profileImage')->storeAs('public/images',$filename);
+                    $profile->address=$req->address;
+                    $profile->dob=$req->dob;
+                    $profile->gender=$req->gender;
+                    $profile->religion=$req->religion;
+                    $profile->relationship=$req->relationship;
+                    $profile->profileImage="storage/images/".$filename;
+                    $profile->fk_users_id=$userId;
+                    $profile->save();
+                    $user->name=$req->name;
+                    $user->save();
+                }
                 
-                $profile->address=$req->address;
-                $profile->dob=$req->dob;
-                $profile->gender=$req->gender;
-                $profile->religion=$req->religion;
-                $profile->relationship=$req->relationship;
-                $profile->profileImage="storage/images/".$filename;
-                $profile->fk_users_id=$userId;
-                $profile->save();
-                Session::flash('message', 'Image upload successful');
+                
+                Session::flash('message', 'Profile upload successful');
                 return redirect()->route('profile');
 
 
