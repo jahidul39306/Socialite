@@ -11,14 +11,14 @@ class ProfileController extends Controller
 {
     
 
-    public function editProfileData()
+    public function editProfileData(Request $req)
     {
         if(session()->has('id'))
         {
             $userId=session()->get('id');
             $profileData=Profile::where('fk_users_id','=',$userId)->first();
             
-<<<<<<< HEAD
+
             $req->validate(
                 [
                     'name'=>'required | regex: /^[A-Z a-z]+$/',
@@ -69,11 +69,11 @@ class ProfileController extends Controller
 
 
 
-=======
+
             $profileName=User::where('id','=',$userId)->select('name')->first();
             // return  $profileName;
             return view('Profile.editProfile')->with('profileData',$profileData)->with('profileName',$profileName);
->>>>>>> 0a8c02325a6e044de43d13c1ae3a2f805e8d2c6e
+
         }
     }
     public function editProfileDataSubmit(Request $req)
