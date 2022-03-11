@@ -18,9 +18,62 @@ class ProfileController extends Controller
             $userId=session()->get('id');
             $profileData=Profile::where('fk_users_id','=',$userId)->first();
             
+<<<<<<< HEAD
+            $req->validate(
+                [
+                    'name'=>'required | regex: /^[A-Z a-z]+$/',
+                    'address'=>'required',
+                    'dob'=>'required',
+                    'gender'=>'required',
+                    'religion'=>'required',
+                    'relationship'=>'required',
+                    'profileImage'=>'mimes:jpg,png',
+                ]
+                );
+                $profile=Profile::where('fk_users_id','=',$userId)->first();
+                $user=User::where('id','=',$userId)->first();
+                if($req->file('profileImage')=='')
+                {
+                    $filename=$profile->profileImage;
+                    $profile->address=$req->address;
+                    $profile->dob=$req->dob;
+                    $profile->gender=$req->gender;
+                    $profile->religion=$req->religion;
+                    $profile->relationship=$req->relationship;
+                    $profile->fk_users_id=$userId;
+                    $profile->save();
+                    $user->name=$req->name;
+                    $user->save();
+                    
+
+                }
+                else{
+                    $filename=$req->name.'.'.$req->file('profileImage')->getClientOriginalExtension();
+                //  return $filename;
+                    $req->file('profileImage')->storeAs('public/images',$filename);
+                    $profile->address=$req->address;
+                    $profile->dob=$req->dob;
+                    $profile->gender=$req->gender;
+                    $profile->religion=$req->religion;
+                    $profile->relationship=$req->relationship;
+                    $profile->profileImage="storage/images/".$filename;
+                    $profile->fk_users_id=$userId;
+                    $profile->save();
+                    $user->name=$req->name;
+                    $user->save();
+                }
+                
+                
+                Session::flash('message', 'Profile upload successful');
+                return redirect()->route('profile');
+
+
+
+=======
             $profileName=User::where('id','=',$userId)->select('name')->first();
             // return  $profileName;
             return view('Profile.editProfile')->with('profileData',$profileData)->with('profileName',$profileName);
+>>>>>>> 0a8c02325a6e044de43d13c1ae3a2f805e8d2c6e
         }
     }
     public function editProfileDataSubmit(Request $req)
