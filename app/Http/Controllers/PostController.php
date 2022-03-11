@@ -25,4 +25,10 @@ class PostController extends Controller
         $p->save();
         return redirect()->back();
     }
+
+    public function myPosts()
+    {
+        $posts = Post::where('fk_users_id', Session::get('id'))->get();
+        return view('myPosts')->with('posts', $posts);
+    }
 }

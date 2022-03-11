@@ -16,38 +16,12 @@
         @include('Layouts.sidebar')
         {{-- main-content --}}
         <div class="main-content">
-            <div class="write-post-container">
-                <div class="user-profile">
-                    <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                    <div class="">
-                        <p>{{Session::get('name')}}</p>
-                    </div>
-                </div>
-                <form action="{{route('post.create')}}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="post-input-container">
-                        <textarea name="postData" id=""  rows="3" placeholder="Share your lite, {{Session::get('name')}}"></textarea>
-                        @error('post-data')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="add-post-links">
-                            <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/video-message.png"/>Live video</a>
-                            <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/image-gallery.png"/>Photo/Video</a>
-                            <a href="#"><img src="https://img.icons8.com/cute-clipart/64/000000/comedy.png"/>Feeling/Activity</a>
-                        </div>
-                        <div class="submit-post">
-                            <input type="image" value="Submit" src='https://img.icons8.com/external-febrian-hidayat-outline-color-febrian-hidayat/64/000000/external-send-user-interface-febrian-hidayat-outline-color-febrian-hidayat.png'/>
-                        </div>
-                    </div>         
-                </form>
-            </div>
-
             @foreach($posts->reverse() as $p)
                 <div class="post-container">
                     <div class="user-profile">
                         <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                        <div class="post-info">
-                            <a href="{{route('profile.id', ["userId", $p->fk_users_id])}}"><p>{{$p->user->name}}</p></a>
+                        <div class="">
+                            <p>{{$p->user->name}}</p>
                             <span>{{$p->createdAt}}</span>
                         </div>
                     </div>

@@ -7,7 +7,11 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\SaveController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,14 +52,28 @@ Route::get('/home',[HomeController::class, 'home'])->name('home')->middleware('g
 
 //post
 Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.create');
+Route::get('/post/myposts',[PostController::class, 'myPosts'])->name('my.posts');
 
 //logout
 Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
 
+
+//like
+Route::get('/like/create', [LikeController::class, 'likeCreate'])->name('like');
+
+//save
+Route::get('/save/create', [SaveController::class, 'saveCreate'])->name('save');
+
+//comment
+Route::get('/comment/view', [CommentController::class, 'commentView'])->name('comment.view');
+Route::post('/comment/create',[CommentController::class, 'commentCreate'])->name('comment.create');
+
 //Profile
 Route::get('/profile',[ProfileController::class,'getProfileData'])->name('profile')->middleware('general.auth');
+Route::get('/profile/id',[ProfileController::class,'getProfileById'])->name('profile.id')->middleware('general.auth');
 
 //edit profile
 Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile')->middleware('general.auth');
 
 Route::post('/editProfile',[ProfileController::class,'editProfileDataSubmit'])->name('editProfileSubmit')->middleware('general.auth');
+
