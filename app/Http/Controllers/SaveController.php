@@ -28,4 +28,10 @@ class SaveController extends Controller
         $fav->save();
         return redirect()->back();
     }
+
+    public function saveShow()
+    {
+       $saves = Save::where('fk_users_id', Session::get('id'))->get();
+       return view('savePosts')->with('saves', $saves);
+    }
 }

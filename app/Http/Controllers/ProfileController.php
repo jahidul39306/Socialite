@@ -71,7 +71,7 @@ class ProfileController extends Controller
 
     public function getProfileByID(Request $req)
     {
-        $userId = $req->userId;
+        $userId = decrypt($req->userId);
         $profileData=Profile::where('fk_users_id','=',$userId)->first();
         $profileName=User::where('id','=',$userId)->select('name')->first();
         

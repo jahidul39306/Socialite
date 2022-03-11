@@ -12,12 +12,7 @@
 </head>
 <body>
     @include('Layouts.header');
-    @if(Session::has('message'))
-        <div class="alert alert-primary" role="alert">
-            {{ Session::get('message') }}
-        </div>
-    @endif
-
+ 
     <div class="container text-center ">
         
         <div class="row">
@@ -26,10 +21,10 @@
                
                 <div class="card">
                     <div class="img">
-                        <img class="img-fluid rounded-top" src="images/a.png" alt="cover photo">
+                        <img class="img-fluid rounded-top" src="{{URL('images/a.png')}}" alt="cover photo">
                         @if(is_null($profileData->profileImage))
                             
-                                <img class="rounded-circle bg-dark" src="images/p.jpg" alt="profile image">
+                                <img class="rounded-circle bg-dark" src="{{URL('images/p.jpg')}}" alt="profile image">
                             
                             @else
                                 <img class="rounded-circle bg-dark" src="{{asset($profileData->profileImage)}}" alt="profile image">
@@ -42,9 +37,11 @@
                             <h3>{{$profileName->name}}</h3>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <button class="btn btn-secondary text-white font-weight-bold" onclick="document.location='{{route('editProfile')}}'" ><img src="https://img.icons8.com/ios-glyphs/20/000000/edit--v1.png"/> Edit profile</button>
-                    </div>
+                    @if(Session::get('id') == $profileData->fk_users_id)
+                        <div class="card-body">
+                            <button class="btn btn-secondary text-white font-weight-bold" onclick="document.location='{{route('editProfile')}}'" ><img src="https://img.icons8.com/ios-glyphs/20/000000/edit--v1.png"/> Edit profile</button>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <ul class="list-group" style="list-style: none;">
                             
