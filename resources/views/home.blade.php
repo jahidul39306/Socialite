@@ -9,45 +9,11 @@
     <script src="https://kit.fontawesome.com/3ac9a28dc6.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    @include('Layouts.header')
     
-    <nav>
-        <div class="nav-left">
-            <p class="logo">Socialite</p>
-            {{-- <img src="" class="logo"> --}}
-            <ul>
-                <li><i class="fa-solid fa-house"></i></li>
-                <li><i class="fa-solid fa-bell"></i></li>
-                <li><i class="fa-solid fa-message"></i></li>
-            </ul>
-        </div>
-        <div class="nav-right">
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type='text' placeholder="Search">
-            </div>
-            <div class="logout">
-                <a href="{{route('logout')}}"><img src="https://img.icons8.com/cute-clipart/50/000000/exit.png"/></a>
-            </div>
-            <div class="nav-user-icon online">
-                <a href="{{route('profile')}}"><img src="images/profile-icon.png"></a>
-                
-            </div>
-        </div>
-    </nav>
-
     <div class="container">
         {{-- left-sidebar --}}
-        <div class="left-sidebar">
-            <div class="imp-links">
-                <a href="{{route('profile')}}"><i class="fa-solid fa-address-card"></i>Profile</a>
-                <a href="#"><i class="fa-solid fa-briefcase"></i>Work profile</a>
-                <a href="#"><i class="fa-solid fa-pencil"></i>My posts</a>
-                <a href="#"><i class="fa-solid fa-star"></i>Favourite posts</a>
-                <a href="#"><i class="fa-solid fa-face-smile"></i>Followers</a>
-                <a href="#"><i class="fa-solid fa-face-kiss-wink-heart"></i>Following</a>
-                <a href="#">See more</a>
-            </div>
-        </div>
+        @include('Layouts.sidebar')
         {{-- main-content --}}
         <div class="main-content">
             <div class="write-post-container">
@@ -92,7 +58,7 @@
                         <div class="activity-icons">
                             {{-- @php$liked = $p->like->user;@endphp --}}
                             <div><a href="{{route('like', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/glyph-neue/64/000000/thick-arrow-pointing-up.png"/></a>{{count($p->like)}}</div>
-                            <div><a href="{{route('comment.view')}}"><img src="https://img.icons8.com/color/48/000000/comments--v1.png"/></a>{{count($p->comment)}}</div>
+                            <div><a href="{{route('comment.view', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/color/48/000000/comments--v1.png"/></a>{{count($p->comment)}}</div>
                             <div><a href="{{route('save', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/000000/external-Save-social-media-bearicons-detailed-outline-bearicons.png"/></a>{{count($p->favourite)}}</div>
                         </div>
                     </div>
