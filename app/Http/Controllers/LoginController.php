@@ -41,7 +41,8 @@ class LoginController extends Controller
             Session::put('id', $findUser->id);
             Session::put('email', $findUser->email);
             Session::put('name', $findUser->name);
-
+            Session::put('type', $findUser->type);
+            Session::put('status', $findUser->status);
             return redirect()->route('home');
         }
         Session::flash('message', 'Wrong credentials');
@@ -61,6 +62,8 @@ class LoginController extends Controller
             Session::put('id', $findUser->id);
             Session::put('email', $findUser->email);
             Session::put('name', $findUser->name);
+            Session::put('type', $findUser->type);
+            Session::put('status', $findUser->status);
             return redirect()->route('home');
            
         }

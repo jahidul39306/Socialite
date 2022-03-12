@@ -42,52 +42,56 @@ Route::post('/login/submit',[LoginController::class, 'loginSubmit'])->name('logi
 Route::get('/registration/google/submit',[RegistrationController::class, 'registrationGoogleSubmit'])->name('registration.google.submit');
 Route::get('/login/google/submit',[LoginController::class, 'loginGoogleSubmit'])->name('login.google.submit');
 
-// Route::group(['middleware' => ['GeneralAuth']], function()
-// {
-//     //home
-//     Route::get('/home',[HomeController::class, 'home'])->name('home');
-// });
+//general login
+Route::group(['middleware' => ['general-auth']], function()
+{
+    //home
+    Route::get('/home',[HomeController::class, 'home'])->name('home');
 
-//home
-Route::get('/home',[HomeController::class, 'home'])->name('home')->middleware('general.auth');
+    //post
+    Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.create');
+    Route::get('/post/myposts',[PostController::class, 'myPosts'])->name('my.posts');
+    Route::get('/post/editposts',[PostController::class, 'postEdit'])->name('post.edit');
+    Route::post('/post/editposts/submit',[PostController::class, 'postEditSubmit'])->name('post.edit.submit');
+    Route::get('/post/delete',[PostController::class, 'postDelete'])->name('post.delete');
 
-//post
-Route::post('/post/create',[PostController::class, 'postCreate'])->name('post.create');
-Route::get('/post/myposts',[PostController::class, 'myPosts'])->name('my.posts');
-Route::get('/post/editposts',[PostController::class, 'postEdit'])->name('post.edit');
-Route::post('/post/editposts/submit',[PostController::class, 'postEditSubmit'])->name('post.edit.submit');
-Route::get('/post/delete',[PostController::class, 'postDelete'])->name('post.delete');
+    //logout
+    Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
 
-//logout
-Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+    //like
+    Route::get('/like/create', [LikeController::class, 'likeCreate'])->name('like');
 
+    //save
+    Route::get('/save/create', [SaveController::class, 'saveCreate'])->name('save');
+    Route::get('/save/show', [SaveController::class, 'saveShow'])->name('save.show');
 
-//like
-Route::get('/like/create', [LikeController::class, 'likeCreate'])->name('like');
+    //comment
+    Route::get('/comment/view', [CommentController::class, 'commentView'])->name('comment.view');
+    Route::post('/comment/create',[CommentController::class, 'commentCreate'])->name('comment.create');
+    Route::get('/comment/edit', [CommentController::class, 'commentEdit'])->name('comment.edit');
+    Route::post('/comment/edit/submit', [CommentController::class, 'commentEditSubmit'])->name('comment.edit.submit');
+    Route::get('/comment/delete', [CommentController::class, 'commentDelete'])->name('comment.delete');
 
-//save
-Route::get('/save/create', [SaveController::class, 'saveCreate'])->name('save');
-Route::get('/save/show', [SaveController::class, 'saveShow'])->name('save.show');
+    //Profile
+    Route::get('/profile',[ProfileController::class,'getProfileData'])->name('profile');
+    Route::get('/profile/id',[ProfileController::class,'getProfileById'])->name('profile.id');
 
-//comment
-Route::get('/comment/view', [CommentController::class, 'commentView'])->name('comment.view');
-Route::post('/comment/create',[CommentController::class, 'commentCreate'])->name('comment.create');
-Route::get('/comment/edit', [CommentController::class, 'commentEdit'])->name('comment.edit');
-Route::post('/comment/edit/submit', [CommentController::class, 'commentEditSubmit'])->name('comment.edit.submit');
-Route::get('/comment/delete', [CommentController::class, 'commentDelete'])->name('comment.delete');
+    //edit profile
+    Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile');
+    Route::post('/editProfile',[ProfileController::class,'editProfileDataSubmit'])->name('editProfileSubmit');
 
-//Profile
-Route::get('/profile',[ProfileController::class,'getProfileData'])->name('profile')->middleware('general.auth');
-Route::get('/profile/id',[ProfileController::class,'getProfileById'])->name('profile.id')->middleware('general.auth');
+    //follower
+    Route::get('/follower/create',[FollowerController::class,'followerCreate'])->name('follower.create');
+    Route::get('/follower/show',[FollowerController::class,'followerShow'])->name('follower.show');
+    Route::get('/following/show',[FollowerController::class,'followingShow'])->name('following.show');
 
-//edit profile
-Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile')->middleware('general.auth');
-Route::post('/editProfile',[ProfileController::class,'editProfileDataSubmit'])->name('editProfileSubmit')->middleware('general.auth');
+    //notification
+    Route::get('/notification',[NotificationController::class,'notificationShow'])->name('notification.show');
+});
 
-//follower
-Route::get('/follower/create',[FollowerController::class,'followerCreate'])->name('follower.create')->middleware('general.auth');
-Route::get('/follower/show',[FollowerController::class,'followerShow'])->name('follower.show')->middleware('general.auth');
-Route::get('/following/show',[FollowerController::class,'followingShow'])->name('following.show')->middleware('general.auth');
+Route::group(['middleware' => ['admin-auth']], function(){
 
-//notification
-Route::get('/notification',[NotificationController::class,'notificationShow'])->name('notification.show')->middleware('general.auth');
+});
+
+Route::view('/admin', 'Admin.header');
+

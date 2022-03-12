@@ -64,18 +64,18 @@
                     <div class="card-footer ">
                         <div class="row ">
                             <div class="item col-md-2  offset-md-1 col-sm-4">
-                                <span>2K</span>
-                                posts
+                                <span>{{$profileData->user->post->count();}}</span>
+                                <div>posts</div>
                             </div>
                             
                             <div class="item col-lg-3 col-md-3  offset-md-1 col-sm-4">
-                                <span>12K</span>
-                                following
+                                <span>{{$profileData->user->following->count()}}</span>
+                                <div>Following</div>
                             </div>
                             
                             <div class="item col-md-3  offset-md-1 col-sm-4">
-                                <span>120K</span>
-                                followers
+                                <span>{{$profileData->user->follower->count()}}</span>
+                                <div>Followers</div>
                             </div>
                             
                         </div>
