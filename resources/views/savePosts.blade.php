@@ -20,10 +20,16 @@
                 <div class="post-container">
                     <div class="user-profile">
                         <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                        <div class="">
-                            <p>{{$p->user->name}}</p>
+                        <div class="post-info">
+                            <a href="{{route('profile.id', ["userId" => encrypt($p->post->fk_users_id)])}}"><p>{{$p->post->user->name}}</p></a>
                             <span>{{$p->post->createdAt}}</span>
                         </div>
+                        @if($p->post->fk_users_id == Session::get('id'))
+                            <div class="modify-icon">
+                                <a href="{{route('post.edit', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-edit-interface-kiranshastry-lineal-color-kiranshastry-1.png"/></a>
+                                <a href="{{route('post.delete', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"/></a>
+                            </div>
+                        @endif
                     </div>
                     <p class="post-text">{{$p->post->postText}}</p>
                     <hr>

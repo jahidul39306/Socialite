@@ -20,7 +20,7 @@ class LikeController extends Controller
         if($like != null)
         {
             $like->delete();
-            return redirect()->route('home');
+            return redirect()->back();
         }
         $like = new Like();
         $like->fk_posts_id = $postId;

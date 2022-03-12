@@ -25,13 +25,42 @@ class CommentController extends Controller
                 'comment' => 'required',
             ]
         );
-
+        $postId = decrypt($req->postId);
         $c = new Comment();
         $c->text = $req->comment;
         $c->createdAt = Carbon::now();
         $c->fk_users_id = Session::get('id');
-        $c->fk_posts_id = $req->postsId;
+        $c->fk_posts_id = $postId;
         $c->save();
+        return redirect()->back();
+    }
+
+    public function commentEdit(Request $req)
+    {
+        $commentId = decrypt($req->commentId);
+        $comment = Comment::where('id', $commentId)->first();
+        return view('commentEdit')->with('comment', $comment);
+    }
+
+    public function commentEditSubmit(Request $req)
+    {
+        $req->validate(
+            [
+                'comment' => 'required',
+            ]
+        );
+        $commentId = decrypt($req->commentId);
+        $c = Comment::where('id', $commentId)->first();
+        $c->text = $req->comment;
+        $c->save();
+        $postId = encrypt($c->fk_posts_id);
+        return redirect()->route('comment.view', ['postId' =>$postId]);
+    }
+
+    public function commentDelete(Request $req)
+    {
+        $commentId = decrypt($req->commentId);
+        $c = Comment::where('id', $commentId)->delete();
         return redirect()->back();
     }
 }

@@ -71,8 +71,8 @@
                                     <td>{{$w->endYear}}</td>
                                     <td>{{$w->position}}</td>
                                     
-                                    <td><button class="btn btn-primary text-white font-weight-bold" onclick="" ><img src="https://img.icons8.com/ios-glyphs/20/000000/edit.png"/> Edit</button></td>
-                                    <td><button class="btn btn-danger text-white font-weight-bold" onclick="document.location='{{route('deleteWorkProfile')}}/{{$w->id}}'" ><img src="https://img.icons8.com/material/20/000000/filled-trash.png"/>Delete</button></td>
+                                    <td><button class="btn btn-primary text-white font-weight-bold" onclick="document.location='{{route('editWorkProfile')}}/{{$w->id}}'" ><img src="https://img.icons8.com/ios-glyphs/20/000000/edit.png"/> Edit</button></td>
+                                    <td><button class="btn btn-danger text-white font-weight-bold" onclick="document.location='{{route('deleteWorkProfile')}}/{{$w->fk_users_id}}'" ><img src="https://img.icons8.com/material/20/000000/filled-trash.png"/>Delete</button></td>
                                     
                                 </tr>
                                 @endif

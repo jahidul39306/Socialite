@@ -31,4 +31,32 @@ class PostController extends Controller
         $posts = Post::where('fk_users_id', Session::get('id'))->get();
         return view('myPosts')->with('posts', $posts);
     }
+
+    public function postEdit(Request $req)
+    {
+        $postId = decrypt($req->postId);
+        $post = Post::where('id', $postId)->first();
+        return view('editPost')->with('post', $post);
+    }
+
+    public function postEditSubmit(Request $req)
+    {
+        $req->validate(
+            [
+                'postData' => 'required',
+            ]
+        );
+        $postId = decrypt($req->postId);
+        $p = Post::where('id', $postId)->first();
+        $p->postText = $req->postData;
+        $p->save();
+        return redirect()->route('home');
+    }
+
+    public function postDelete(Request $req)
+    {
+        $postId = decrypt($req->postId);
+        $p = Post::where('id', $postId)->delete();
+        return redirect()->back();
+    }
 }

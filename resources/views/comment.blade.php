@@ -16,8 +16,8 @@
             <div class="post-container">
                 <div class="user-profile">
                     <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                    <div class="">
-                        <p>{{$post->user->name}}</p>
+                    <div class="post-info">
+                        <a href="{{route('profile.id', ["userId" => encrypt($post->fk_users_id)])}}"><p>{{$post->user->name}}</p></a>
                         <span>{{$post->createdAt}}</span>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <form action="{{route('comment.create', ['postsId' => $post->id])}}" method="POST">
+            <form action="{{route('comment.create', ['postId' => encrypt($post->id)])}}" method="POST">
                 {{ csrf_field() }}
                 <div class="user-profile">
                     <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
@@ -57,10 +57,16 @@
             <div class="post-container">
                 <div class="user-profile">
                     <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                    <div class="">
-                        <p>{{$c->user->name}}</p>
+                    <div class="post-info">
+                        <a href="{{route('profile.id', ["userId" => encrypt($c->fk_users_id)])}}"><p>{{$c->user->name}}</p></a>
                         <span>{{$c->createdAt}}</span>
                     </div>
+                    @if($c->fk_users_id == Session::get('id'))
+                            <div class="modify-icon">
+                                <a href="{{route('comment.edit', ['commentId' => encrypt($c->id)])}}"><img src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-edit-interface-kiranshastry-lineal-color-kiranshastry-1.png"/></a>
+                                <a href="{{route('comment.delete', ['commentId' => encrypt($c->id)])}}"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"/></a>
+                            </div>
+                    @endif
                 </div>
                 <p class="post-text">{{$c->text}}</p>
             </div>
