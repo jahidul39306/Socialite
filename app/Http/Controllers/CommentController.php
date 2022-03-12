@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
@@ -32,6 +33,14 @@ class CommentController extends Controller
         $c->fk_users_id = Session::get('id');
         $c->fk_posts_id = $postId;
         $c->save();
+
+        $notification = new Notification();
+        $notification->fk_users_id = $c->post->user->id;
+        $notification->fk_notifier_users_id = Session::get('id');
+        $notification->createdAt = Carbon::now();
+        $notification->fk_posts_id = $postId;
+        $notification->msg = "commented on your post";
+        $notification->save();
         return redirect()->back();
     }
 

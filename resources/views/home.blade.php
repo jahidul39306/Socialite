@@ -62,7 +62,6 @@
                     <div class="post-row">
                         <div></div>
                         <div class="activity-icons">
-                            {{-- @php$liked = $p->like->user;@endphp --}}
                             <div><a href="{{route('like', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/glyph-neue/64/000000/thick-arrow-pointing-up.png"/></a>{{count($p->like)}}</div>
                             <div><a href="{{route('comment.view', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/color/48/000000/comments--v1.png"/></a>{{count($p->comment)}}</div>
                             <div><a href="{{route('save', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/000000/external-Save-social-media-bearicons-detailed-outline-bearicons.png"/></a>{{count($p->favourite)}}</div>

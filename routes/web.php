@@ -12,7 +12,7 @@ use App\Http\Controllers\SaveController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
-
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,3 +89,5 @@ Route::get('/follower/create',[FollowerController::class,'followerCreate'])->nam
 Route::get('/follower/show',[FollowerController::class,'followerShow'])->name('follower.show')->middleware('general.auth');
 Route::get('/following/show',[FollowerController::class,'followingShow'])->name('following.show')->middleware('general.auth');
 
+//notification
+Route::get('/notification',[NotificationController::class,'notificationShow'])->name('notification.show')->middleware('general.auth');
