@@ -12,6 +12,7 @@
     
 </head>
 <body>
+@include('Layouts.header')
     <div class="container text-center ">
         <div class="row">
             <div class="col-md-6 offset-md-3 col-md-6 mt-5  p-2 bg-light shadow">
@@ -36,33 +37,29 @@
                                     @enderror
                         </div>
                         <div class="crad-body">
-                            <div class="card-title">
-                                <input class=" text-justify" type="text" name="name" id="name" value="{{$profileName->name ?? old('name')}}">
+                            <div class="form mt-5 mb-2  p-4 bg-light shadow col-md-10">
+                                <h3><label class="text-left" for="name">Profile Name</label></h3>
+                                <input class="form-control" type="text" name="name" id="name" value="{{$profileName->name ?? old('name')}}">
                             </div>
-                        </div>
-                        
-                        <div class="card-body">
-                            <div class="row ">
-                                <div class="form-group text-left col-auto mr-auto ">
-                                    <label class="text-left" for="address">Address</label>
+                            <div class="form mt-5 mb-2  p-4 bg-light shadow col-md-10">
+                                <div class="col-auto mr-auto ">
+                                    <h3><label class="text-left" for="address">Address</label></h3>
                                     <input type="text" class="form-control" name="address" id="address" value="{{$profileData->address ?? old('address')}}">
                                     @error('address')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                                <br>
                                 <div class="col-auto ">
-                                    <label for="dob">Date of birth</label>
+                                    <h3><label for="dob">Date of birth</label></h3>
                                     <input type="date" class="form-control" name="dob" id="dob" value="{{$profileData->dob ?? old('dob')}}">
                                     @error('dob')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class=" text-left col-auto mr-auto ">
-                                    <label for="gender">Gender</label>
+                                <br>
+                                <div class="col-auto ">
+                                <h3><label for="gender">Gender</label></h3>
                                     <select name="gender" id="gender">
                                         <option value="select" {{$profileData->gender ?? 'selected'}}>Select</option>
                                         <option value="male" {{$profileData->gender=='male'? 'selected' :''}}>Male</option>
@@ -73,8 +70,9 @@
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="col-auto offset-md-2">
-                                    <label for="religion">Religion</label>
+                                <br>
+                                <div class="col-auto ">
+                                <h3><label for="religion">Religion</label></h3>
                                     <select name="religion" id="religion">
                                         <option value="islam" {{$profileData->religion=='islam'? 'selected' :''}}>Islam</option>
                                         <option value="hindu" {{$profileData->religion=='hindu'? 'selected' :''}}>Hindu</option>
@@ -85,12 +83,9 @@
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-5">
-                                <div class="form-group text-left col-md-6 mr-auto ">
-                                    <label for="relationship">Relationship</label>
+                                <br>
+                                <div class="col-auto ">
+                                <h3><label for="relationship">Relationship</label></h3>
                                     <select name="relationship" id="gender">
                                         <option value="single" {{$profileData->relationship=='single'? 'selected' :''}}>Single</option>
                                         <option value="married" {{$profileData->relationship=='married'? 'selected' :''}}>Married</option>
@@ -100,18 +95,9 @@
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                
                             </div>
                         </div>
-                        <div class="card-footer ">
-                            <div class="row ">
-                            <div class="col-md-4 offset-md-4">
-                                <input class="btn btn-primary" type="submit" value="Save">
-                            </div>    
-                            
-                            </div>
-
-                        </div>
+                        <input type="submit" class="button btn-primary" value="Save">
                     </div>
                 </form>
             </div>

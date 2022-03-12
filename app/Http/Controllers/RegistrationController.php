@@ -5,6 +5,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\Work_profile;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,6 +44,10 @@ class RegistrationController extends Controller
         $profile->fk_users_id=$us->id;
         $profile->save();
 
+        $work_Profile=new Work_profile();
+        $work_Profile->fk_users_id=$us->id;
+        $work_Profile->save();
+
         Session::flash('message', 'Registration successful!, Please login');
         return redirect()->route('login');
     }
@@ -70,6 +75,10 @@ class RegistrationController extends Controller
             $profile=new Profile();
             $profile->fk_users_id = $newUser->id;
             $profile->save();
+
+            $work_Profile=new Work_profile();
+            $work_Profile->fk_users_id=$newUser->id;
+            $work_Profile->save();
 
             Session::flash('message', 'Registration successful!, Please login');
             return redirect()->route('login');

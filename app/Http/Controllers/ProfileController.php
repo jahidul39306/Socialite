@@ -6,9 +6,53 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Work_profile;
 
 class ProfileController extends Controller
 {
+
+    public function getWorkProfile()
+    {
+        $userId=session()->get('id');
+        $profileData=Profile::where('fk_users_id','=',$userId)->first();
+        $profileName=User::where('id','=',$userId)->select('name')->first();
+
+        $workProfiles=Work_profile::where('fk_users_id','=',$userId)->get();
+        return view('Profile.workProfile')->with('profileData',$profileData)->with('profileName',$profileName)->with('workProfiles',$workProfiles);
+
+    }
+    public function addWorkProfile()
+    {
+        
+        return view('Profile.addWorkProfile');
+    }
+    public function addWorkProfileSubmit(Request $req)
+    {
+        $userId=session()->get('id');
+        $req->validate(
+            [
+                'institution'=>'required',
+                'startYear'=>'required',
+                'endYear'=>'required',
+                'position'=>'required|regex: /^[A-Z a-z]+$/',
+
+            ]
+            );
+        $workProfile=new Work_profile();
+        $workProfile->institution=$req->institution;
+        $workProfile->startYear=$req->startYear;
+        $workProfile->endYear=$req->endYear;
+        $workProfile->position=$req->position;
+        $workProfile->fk_users_id=$userId;
+        $workProfile->save();
+        return redirect()->route('workProfile');
+
+    }
+
+    public function deleteWorkProfile($id)
+    {
+        return "ok $id";
+    }
     
 
     public function editProfileData()

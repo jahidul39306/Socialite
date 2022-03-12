@@ -77,4 +77,8 @@ Route::get('/profile/id',[ProfileController::class,'getProfileById'])->name('pro
 Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile')->middleware('general.auth');
 
 Route::post('/editProfile',[ProfileController::class,'editProfileDataSubmit'])->name('editProfileSubmit')->middleware('general.auth');
-
+//work Profile
+Route::get('/workProfile',[ProfileController::class, 'getWorkProfile'])->name('workProfile')->middleware('general.auth');
+Route::get('/addWorkProfile',[ProfileController::class, 'addWorkProfile'])->name('addWorkProfile')->middleware('general.auth');
+Route::post('/addWorkProfile',[ProfileController::class,'addWorkProfileSubmit'])->name('addWorkProfileSubmit')->middleware('general.auth');
+Route::get('/deleteWorkProfile/{id?}',[ProfileController::class,'deleteWorkProfile'])->name('deleteWorkProfile')->middleware('general.auth');

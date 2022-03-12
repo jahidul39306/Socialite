@@ -12,7 +12,7 @@
     <div class="left-sidebar">
         <div class="imp-links">
             <a href="{{route('profile')}}"><img src="https://img.icons8.com/plasticine/100/000000/administrator-male.png"/>Profile</a>
-            <a href="#"><img src="https://img.icons8.com/external-soft-fill-juicy-fish/60/000000/external-work-love-soft-fill-soft-fill-juicy-fish.png"/>Work profile</a>
+            <a href="{{route('workProfile')}}"><img src="https://img.icons8.com/external-soft-fill-juicy-fish/60/000000/external-work-love-soft-fill-soft-fill-juicy-fish.png"/>Work profile</a>
             <a href="{{route('my.posts')}}"><img src="https://img.icons8.com/external-soft-fill-juicy-fish/60/000000/external-write-customer-feedback-soft-fill-soft-fill-juicy-fish.png"/>My posts</a>
             <a href="{{route('save.show')}}"><img src="https://img.icons8.com/fluency/48/000000/likes-folder--v2.png"/></i>Favourite posts</a>
             <a href="#"><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-followers-influencer-marketing-wanicon-lineal-color-wanicon.png"/>Followers</a>

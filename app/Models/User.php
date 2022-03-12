@@ -8,12 +8,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Post;
+use App\Models\Work_profile;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     public $timestamps = false;
+
+    public function workProfile()
+    {
+        return $this->hasMany(Work_profile::class, 'fk_users_id');
+    }
 
     public function post()
     {
