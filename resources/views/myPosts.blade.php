@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>My posts</title>
     <link rel="stylesheet" href="{{URL('custom css/home.css')}}">
     <script src="https://kit.fontawesome.com/3ac9a28dc6.js" crossorigin="anonymous"></script>
 </head>
@@ -20,10 +20,16 @@
                 <div class="post-container">
                     <div class="user-profile">
                         <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
-                        <div class="">
-                            <p>{{$p->user->name}}</p>
+                        <div class="post-info">
+                            <a href="{{route('profile.id', ["userId" => encrypt($p->fk_users_id)])}}"><p>{{$p->user->name}}</p></a>
                             <span>{{$p->createdAt}}</span>
                         </div>
+                        @if($p->user->id == Session::get('id'))
+                            <div class="modify-icon">
+                                <a href="{{route('post.edit', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-edit-interface-kiranshastry-lineal-color-kiranshastry-1.png"/></a>
+                                <a href="{{route('post.delete', ['postId' => encrypt($p->id)])}}"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"/></a>
+                            </div>
+                        @endif
                     </div>
                     <p class="post-text">{{$p->postText}}</p>
                     <hr>

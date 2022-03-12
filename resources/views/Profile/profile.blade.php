@@ -41,6 +41,16 @@
                         <div class="card-body">
                             <button class="btn btn-secondary text-white font-weight-bold" onclick="document.location='{{route('editProfile')}}'" ><img src="https://img.icons8.com/ios-glyphs/20/000000/edit--v1.png"/> Edit profile</button>
                         </div>
+                    @else                     
+                        @if($result != null)
+                            <div class="card-body">
+                                <button class="btn btn-secondary text-white font-weight-bold" onclick="document.location='{{route('follower.create', ['userId' => encrypt($profileData->fk_users_id)])}}'" >Unfollow</button>
+                            </div>
+                        @else
+                            <div class="card-body">
+                                <button class="btn btn-secondary text-white font-weight-bold" onclick="document.location='{{route('follower.create', ['userId' => encrypt($profileData->fk_users_id)])}}'" >Follow</button>
+                            </div>
+                        @endif
                     @endif
                     <div class="card-body">
                         <ul class="list-group" style="list-style: none;">
