@@ -15,7 +15,7 @@
             {{-- <img src="" class="logo"> --}}
             <ul>
                 <li><a href="{{route('home')}}"><i class="fa-solid fa-house"></i></a></li>
-                <li><i class="fa-solid fa-bell"></i></li>
+                <li><a href="{{route('notification.show')}}"><i class="fa-solid fa-bell"></i></li>
                 <li><i class="fa-solid fa-message"></i></li>
             </ul>
         </div>

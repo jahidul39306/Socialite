@@ -47,6 +47,10 @@ class Kernel extends HttpKernel
 
         'general-auth' => [
             \App\Http\Middleware\GeneralAuth::class,
+        ],
+
+        'admin-auth' => [
+            \App\Http\Middleware\AdminAuth::class,
         ]
     ];
 
@@ -68,5 +72,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'general.auth' => \App\Http\Middleware\GeneralAuth::class,
+        'admin.auth' => App\Http\Middleware\AdminAuth::class,
     ];
 }

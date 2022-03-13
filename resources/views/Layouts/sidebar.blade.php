@@ -17,6 +17,7 @@
             <a href="{{route('save.show')}}"><img src="https://img.icons8.com/fluency/48/000000/likes-folder--v2.png"/></i>Favourite posts</a>
             <a href="{{route('follower.show')}}"><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-followers-influencer-marketing-wanicon-lineal-color-wanicon.png"/>Followers</a>
             <a href="{{route('following.show')}}"><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-love-friendship-wanicon-lineal-color-wanicon.png"/></i>Following</a>
+            <a href="{{route('invoice')}}"><img src="https://img.icons8.com/color/48/000000/download--v1.png"/></i>Download Profile Information</a>
             <a href="#">See more</a>
         </div>
     </div>

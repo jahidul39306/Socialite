@@ -61,7 +61,7 @@
                                 <div class="col-auto ">
                                 <h3><label for="gender">Gender</label></h3>
                                     <select name="gender" id="gender">
-                                        <option value="select" {{$profileData->gender ?? 'selected'}}>Select</option>
+                                        <!-- <option value="select" {{$profileData->gender ?? 'selected'}}>Select</option> -->
                                         <option value="male" {{$profileData->gender=='male'? 'selected' :''}}>Male</option>
                                         <option value="female" {{$profileData->gender=='female'? 'selected' :''}}>Female</option>
                                         

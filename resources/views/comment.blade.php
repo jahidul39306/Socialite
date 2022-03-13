@@ -38,8 +38,7 @@
                 <div class="user-profile">
                     <img src="https://img.icons8.com/cute-clipart/64/000000/name.png"/>
                     <div class="">
-                        <p>{{$post->user->name}}</p>
-                        <span>{{$post->createdAt}}</span>
+                        <p>{{Session::get('name')}}</p>
                     </div>
                 </div>
                 <div class="post-input-container" >

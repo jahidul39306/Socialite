@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Save;
+use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class SaveController extends Controller
@@ -26,6 +28,14 @@ class SaveController extends Controller
         $fav->fk_posts_id = $postId;
         $fav->fk_users_id = Session::get('id');
         $fav->save();
+
+        $notification = new Notification();
+        $notification->fk_users_id = $fav->post->user->id;
+        $notification->fk_notifier_users_id = Session::get('id');
+        $notification->createdAt = Carbon::now();
+        $notification->fk_posts_id = $postId;
+        $notification->msg = "favourited your post";
+        $notification->save();
         return redirect()->back();
     }
 
