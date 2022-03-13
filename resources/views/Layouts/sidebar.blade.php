@@ -14,9 +14,12 @@
             <a href="{{route('profile')}}"><img src="https://img.icons8.com/plasticine/100/000000/administrator-male.png"/>Profile</a>
             <a href="#"><img src="https://img.icons8.com/external-soft-fill-juicy-fish/60/000000/external-work-love-soft-fill-soft-fill-juicy-fish.png"/>Work profile</a>
             <a href="{{route('my.posts')}}"><img src="https://img.icons8.com/external-soft-fill-juicy-fish/60/000000/external-write-customer-feedback-soft-fill-soft-fill-juicy-fish.png"/>My posts</a>
-            <a href="{{route('save.show')}}"><img src="https://img.icons8.com/fluency/48/000000/likes-folder--v2.png"/></i>Favourite posts</a>
+            <a href="{{route('save.show')}}"><img src="https://img.icons8.com/fluency/48/000000/likes-folder--v2.png"/>Favourite posts</a>
             <a href="{{route('follower.show')}}"><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-followers-influencer-marketing-wanicon-lineal-color-wanicon.png"/>Followers</a>
-            <a href="{{route('following.show')}}"><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-love-friendship-wanicon-lineal-color-wanicon.png"/></i>Following</a>
+            <a href="{{route('following.show')}}"><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/000000/external-love-friendship-wanicon-lineal-color-wanicon.png"/>Following</a>
+            @if(Session::get('type') == 'Admin')
+                <a href="{{route('admin.dashboard')}}"><img src="https://img.icons8.com/color/48/000000/admin-settings-male.png"/>Admin Dashboard</a>
+            @endif
             <a href="#">See more</a>
         </div>
     </div>

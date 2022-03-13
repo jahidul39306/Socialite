@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Session;
 use Closure;
 use Illuminate\Http\Request;
 
