@@ -13,6 +13,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,11 +103,17 @@ Route::group(['middleware' => ['general-auth']], function()
 
     //notification
     Route::get('/notification',[NotificationController::class,'notificationShow'])->name('notification.show');
+
+    //user
+    Route::get('/changestatus',[UserController::class,'changeStatus'])->name('user.changeStatus');
 });
 
 Route::group(['middleware' => ['admin-auth']], function(){
-
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/users', [AdminController::class, 'usersInfo'])->name('admin.users');
+    Route::get('/admin/comments', [AdminController::class, 'postsInfo'])->name('admin.posts');
+    Route::get('/admin/likes', [AdminController::class, 'commentsInfo'])->name('admin.comments');
 });
 
-Route::view('/admin', 'Admin.header');
+
 
