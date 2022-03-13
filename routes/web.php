@@ -82,6 +82,20 @@ Route::group(['middleware' => ['general-auth']], function()
     Route::get('/editProfile',[ProfileController::class,'editProfileData'])->name('editProfile');
     Route::post('/editProfile',[ProfileController::class,'editProfileDataSubmit'])->name('editProfileSubmit');
 
+    //work Profile
+    Route::get('/workProfile',[ProfileController::class, 'getWorkProfile'])->name('workProfile')->middleware('general.auth');
+    Route::get('/addWorkProfile',[ProfileController::class, 'addWorkProfile'])->name('addWorkProfile')->middleware('general.auth');
+    Route::post('/addWorkProfile',[ProfileController::class,'addWorkProfileSubmit'])->name('addWorkProfileSubmit')->middleware('general.auth');
+    Route::get('/deleteWorkProfile/{id?}',[ProfileController::class,'deleteWorkProfile'])->name('deleteWorkProfile')->middleware('general.auth');
+    Route::get('/editWorkProfile/{id?}',[ProfileController::class,'editWorkProfile'])->name('editWorkProfile')->middleware('general.auth');
+    Route::post('/editWorkProfile}',[ProfileController::class,'editWorkProfileSubmit'])->name('editWorkProfileSubmit')->middleware('general.auth');
+
+    //Report generate
+    Route::get('/invoice',[ProfileController::class,'invoice'])->name('invoice')->middleware('general.auth');
+
+    //graph 
+    Route::get('/graph}',[ProfileController::class,'graph'])->name('graph')->middleware('general.auth');
+
     //follower
     Route::get('/follower/create',[FollowerController::class,'followerCreate'])->name('follower.create');
     Route::get('/follower/show',[FollowerController::class,'followerShow'])->name('follower.show');

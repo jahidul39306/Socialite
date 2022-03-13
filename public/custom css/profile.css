@@ -1,6 +1,16 @@
 body{
     background-color: white;
 }
+.sidebar{
+    position: absolute;
+    left: 3%;
+    width: 400px;
+}
+.p{
+    position: absolute;
+    left: 30%;
+    margin-left: 2px;
+}
 .card{
     background-color: white;
     box-shadow: 1px 1px 10px rgb(146,143,143) !important;

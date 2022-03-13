@@ -6,10 +6,109 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Work_profile;
+use PDF;
 use App\Models\Follower;
+
 
 class ProfileController extends Controller
 {
+    
+    public function graph()
+    {
+        $userId=session()->get('id');
+        $data="";
+        $result=Work_profile::where('fk_users_id','=',$userId)->select('institution','startYear','endYear')->get();
+        foreach($result as $a)
+        {
+            $startDate = strtotime($a->startYear) ;
+            $endDate=strtotime($a->endYear);
+            $d=($endDate-$startDate)/(60*60*24);
+            $data.="['".$a->institution."',   ".$d."],";
+        }
+        // dd($data);
+        $chartData=$data;
+        return view('Profile.graph',compact('chartData'));
+    }
+    public function invoice()
+    {
+        $userId=session()->get('id');
+        $profileData=Profile::where('fk_users_id','=',$userId)->first();
+        $workProfiles=Work_profile::where('fk_users_id','=',$userId)->get();
+        $user=User::where('id','=',$userId)->first();
+        // return view('Profile.invoice',compact('workProfiles','user','profileData'));
+
+        $pdf=PDF::loadView('Profile.invoice',compact('workProfiles','user','profileData'));
+        return $pdf->download('invoice.pdf');
+    }
+    public function getWorkProfile()
+    {
+        $userId=session()->get('id');
+        $profileData=Profile::where('fk_users_id','=',$userId)->first();
+        $profileName=User::where('id','=',$userId)->select('name')->first();
+
+        $workProfiles=Work_profile::where('fk_users_id','=',$userId)->get();
+        return view('Profile.workProfile')->with('profileData',$profileData)->with('profileName',$profileName)->with('workProfiles',$workProfiles);
+
+    }
+    public function addWorkProfile()
+    {
+        
+        return view('Profile.addWorkProfile');
+    }
+    public function addWorkProfileSubmit(Request $req)
+    {
+        $userId=session()->get('id');
+        $req->validate(
+            [
+                'institution'=>'required',
+                'startYear'=>'required',
+                'endYear'=>'required',
+                'position'=>'required|regex: /^[A-Z a-z]+$/',
+
+            ]
+            );
+        $workProfile=new Work_profile();
+        $workProfile->institution=$req->institution;
+        $workProfile->startYear=$req->startYear;
+        $workProfile->endYear=$req->endYear;
+        $workProfile->position=$req->position;
+        $workProfile->fk_users_id=$userId;
+        $workProfile->save();
+        return redirect()->route('workProfile');
+
+    }
+
+    public function deleteWorkProfile($id)
+    {
+        $delete=Work_profile::where('id','=',$id)->delete();
+        return redirect()->route('workProfile');
+    }
+
+    public function editWorkProfile($id)
+    {
+        $workProfile=Work_profile::where('id','=',decrypt($id))->first();
+        return view('Profile.editWorkProfile')->with('wp',$workProfile);
+    }
+    public function editWorkProfileSubmit(Request $req)
+    {
+        $req->validate(
+            [
+                'institution'=>'required',
+                'startYear'=>'required',
+                'endYear'=>'required',
+                'position'=>'required|regex: /^[A-Z a-z]+$/',
+
+            ]
+            );
+        $workProfile=Work_profile::where('id','=',$req->w_id)->first();
+        $workProfile->institution=$req->institution;
+        $workProfile->startYear=$req->startYear;
+        $workProfile->endYear=$req->endYear;
+        $workProfile->position=$req->position;
+        $workProfile->save();
+        return redirect()->route('workProfile');
+    }
     public function editProfileData()
     {
         if(session()->has('id'))

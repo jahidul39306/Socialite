@@ -14,11 +14,14 @@
     @include('Layouts.header');
  
     <div class="container text-center ">
-        
+    
         <div class="row">
             
-            <div class="col-md-6 offset-md-3 col-md-6 mt-5  p-2 bg-light shadow">
-               
+            <div class=" sidebar col-md-6">
+            @include('Layouts.sidebar')
+            </div>
+            <div class=" p col-md-6  bg-light shadow">
+            
                 <div class="card">
                     <div class="img">
                         <img class="img-fluid rounded-top" src="{{URL('images/a.png')}}" alt="cover photo">
